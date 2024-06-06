@@ -17,3 +17,12 @@ class PaymentMethodSelected extends PaymentState {
 }
 
 class PaymentConfirmed extends PaymentState {}
+
+class DropdownState extends PaymentState {
+  final bool isDropdownOpened;
+
+  DropdownState(this.isDropdownOpened);
+
+  @override
+  List<Object> get props => [isDropdownOpened];
+}

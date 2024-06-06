@@ -1,7 +1,7 @@
 import 'package:bloc_project/core/theme/app_pallete.dart';
 import 'package:bloc_project/core/theme/theme.dart';
 import 'package:bloc_project/features/payment/bloc/payment_bloc.dart';
-import 'package:bloc_project/features/payment/payment_card.dart';
+import 'package:bloc_project/features/payment/widget/payment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -178,7 +178,7 @@ class PaymentScreen extends StatelessWidget {
   }
 }
 
-class DropdownMenu extends StatefulWidget {
+class DropdownMenu extends StatelessWidget {
   final String? initialValue;
   final List<DropdownMenuItem<String>> items;
   final ValueChanged<String?>? onChanged;
@@ -191,77 +191,75 @@ class DropdownMenu extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DropdownMenuState createState() => _DropdownMenuState();
-}
-
-class _DropdownMenuState extends State<DropdownMenu> {
-  bool isDropdownOpened = false;
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              isDropdownOpened = !isDropdownOpened;
-            });
-          },
-          child: Container(
-            height: 50,
-            width: 300,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppPallete.gradient1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.initialValue ?? 'Select',
-                    style: TextStyle(fontSize: 16),
+    return BlocBuilder<PaymentBloc, PaymentState>(
+      builder: (context, state) {
+        bool isDropdownOpened = false;
+        if (state is DropdownState) {
+          isDropdownOpened = state.isDropdownOpened;
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () {
+                context.read<PaymentBloc>().add(ToggleDropdown());
+              },
+              child: Container(
+                height: 50,
+                width: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppPallete.gradient1),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        initialValue ?? 'Select',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Icon(isDropdownOpened
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down),
+                    ],
                   ),
-                  Icon(isDropdownOpened
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-        if (isDropdownOpened)
-          Container(
-            height: 150,
-            width: 300,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: ListView.builder(
-              itemCount: widget.items.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      isDropdownOpened = false;
-                      if (widget.onChanged != null) {
-                        widget.onChanged!(widget.items[index].value);
-                      }
-                    });
+            if (isDropdownOpened)
+              Container(
+                height: 150,
+                width: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        context.read<PaymentBloc>().add(ToggleDropdown());
+                        if (onChanged != null) {
+                          onChanged!(items[index].value);
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 16),
+                        child: items[index].child,
+                      ),
+                    );
                   },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    child: widget.items[index].child,
-                  ),
-                );
-              },
-            ),
-          ),
-      ],
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

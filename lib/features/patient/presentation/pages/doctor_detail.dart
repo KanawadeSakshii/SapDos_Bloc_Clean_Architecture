@@ -5,7 +5,7 @@ import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/blo
 import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_event.dart';
 import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_state.dart';
 import 'package:bloc_project/features/patient/presentation/pages/doctor_details_android.dart';
-import 'package:bloc_project/features/payment/payment_screen.dart';
+import 'package:bloc_project/features/payment/pages/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -263,9 +263,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                               const SnackBar(
                                 content: Text(
                                   "Please select a time slot.",
-                                  style: TextStyle(
-                                      color:
-                                          Colors.red), 
+                                  style: TextStyle(color: Colors.red),
                                 ),
                               ),
                             );

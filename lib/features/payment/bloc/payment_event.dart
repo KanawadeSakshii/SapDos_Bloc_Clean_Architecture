@@ -17,3 +17,5 @@ class SelectPaymentMethod extends PaymentEvent {
 }
 
 class ConfirmPayment extends PaymentEvent {}
+
+class ToggleDropdown extends PaymentEvent {}
