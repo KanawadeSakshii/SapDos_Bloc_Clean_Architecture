@@ -1,9 +1,9 @@
+import 'package:bloc_project/features/doctor/domain/entities/appointment_data.dart';
 import 'package:bloc_project/features/doctor/presentation/blocs/dropdown/bloc/dropdown_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_project/core/theme/app_pallete.dart';
 import 'package:bloc_project/features/doctor/presentation/pages/patient_details.dart';
-import 'package:bloc_project/features/doctor/data/models/appointment_model.dart';
 
 class CustomDropdownWidget extends StatelessWidget {
   final List<CustomDropdownItem> items;

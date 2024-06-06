@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:bloc_project/features/doctor/data/models/appointment_model.dart';
+import 'package:bloc_project/features/doctor/domain/entities/appointment_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

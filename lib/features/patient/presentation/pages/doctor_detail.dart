@@ -265,7 +265,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                   "Please select a time slot.",
                                   style: TextStyle(
                                       color:
-                                          Colors.red), // Set text color to red
+                                          Colors.red), 
                                 ),
                               ),
                             );

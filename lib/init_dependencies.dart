@@ -2,7 +2,7 @@ import 'package:bloc_project/core/supabasedata/url_secrets.dart';
 import 'package:bloc_project/features/authenticate/domain/usecases/user_sign_up.dart';
 import 'package:bloc_project/features/authenticate/data/datasources/auth_remote_data.dart';
 import 'package:bloc_project/features/authenticate/domain/repository/auth_repo.dart';
-import 'package:bloc_project/features/authenticate/domain/repository/auth_repo_impl.dart';
+import 'package:bloc_project/features/authenticate/data/repoIMPL/auth_repo_impl.dart';
 import 'package:bloc_project/features/authenticate/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
