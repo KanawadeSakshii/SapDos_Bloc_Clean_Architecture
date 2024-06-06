@@ -1,0 +1,111 @@
+[
+  {
+    "doctorName": "Dr. John Doe",
+    "doctorSpecialization": "Cardiologist",
+    "doctorImage": "assets/doctor/doctor4men.jpg",
+    "rating": 3,
+    "education": "MBBS, MD - Cardiology",
+    "description": "Dr. John Doe has over 20 years of experience in cardiology.",
+    "experience": "20 years",
+    "timeSlots": [
+      "09:00 - 09:30 AM",
+      "10:30 - 11:30 AM",
+      "11:30 - 12:00 AM",
+      "12:30 - 01:30 AM",
+      "01:30 - 02:00 AM",
+      "02:30 - 03:30 AM",
+      "03:30 - 04:00 PM",
+      "04:30 - 05:30 PM"
+    ]
+  },
+  {
+    "doctorName": "Dr. Jane Smith",
+    "doctorSpecialization": "Dermatologist",
+    "doctorImage": "assets/doctor/doctor6man.jpg",
+    "rating": 4,
+    "education": "MBBS, MD - Dermatology",
+    "description": "Dr. Jane Smith is a renowned dermatologist with a decade of experience.",
+    "experience": "10 years",
+    "timeSlots": [
+      "09:00 - 09:30 AM",
+      "09:30 - 10:30 AM",
+      "11:00 - 12:00 AM",
+      "01:00 - 02:00 PM",
+      "02:00 - 03:00 PM",
+      "03:30 - 04:30 PM",
+      "04:30 - 05:30 PM"
+    ]
+  },
+  {
+    "doctorName": "Dr. Alex Brown",
+    "doctorSpecialization": "Pediatrician",
+    "doctorImage": "assets/doctor/doctor2women.jpg",
+    "rating": 5,
+    "education": "MBBS, MD - Pediatrics",
+    "description": "Dr. Alex Brown specializes in pediatric care and has 15 years of experience.",
+    "experience": "15 years",
+    "timeSlots": [
+      "08:00 - 08:30 AM",
+      "09:00 - 10:00 AM",
+      "10:00 - 11:00 AM",
+      "11:30 - 12:30 PM",
+      "01:00 - 02:00 PM",
+      "02:00 - 03:00 PM",
+      "03:30 - 04:30 PM"
+    ]
+  },
+  {
+    "doctorName": "Dr. Emily White",
+    "doctorSpecialization": "Neurologist",
+    "doctorImage": "assets/doctor/doctor3women.jpg",
+    "rating": 4,
+    "education": "MBBS, MD - Neurology",
+    "description": "Dr. Emily White is an expert in neurological disorders with 12 years of practice.",
+    "experience": "12 years",
+    "timeSlots": [
+      "08:00 - 08:30 AM",
+      "09:30 - 10:30 AM",
+      "10:30 - 11:30 AM",
+      "12:00 - 01:00 PM",
+      "01:00 - 02:00 PM",
+      "02:30 - 03:30 PM",
+      "04:00 - 05:00 PM"
+    ]
+  },
+  {
+    "doctorName": "Dr. Michael Green",
+    "doctorSpecialization": "Orthopedic Surgeon",
+    "doctorImage": "assets/doctor/doctor7man.jpg",
+    "rating": 4,
+    "education": "MBBS, MS - Orthopedics",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut  enim ad minim veniam quis nostrud exercitation ullamco laboris     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in",
+    "experience": "18 years",
+    "timeSlots": [
+      "08:30 - 09:00 AM",
+      "09:30 - 10:30 AM",
+      "10:30 - 11:30 AM",
+      "12:00 - 01:00 PM",
+      "01:30 - 02:30 PM",
+      "03:00 - 04:00 PM",
+      "04:30 - 05:30 PM"
+    ]
+  },
+  {
+    "doctorName": "Dr. AnnA Green",
+    "doctorSpecialization": "Orthopedic Surgeon",
+    "doctorImage": "assets/doctor/doctor5weman.jpg",
+    "rating": 4,
+    "education": "MBBS, MS - Orthopedics",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut  enim ad minim veniam quis nostrud exercitation ullamco laboris     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in",
+    "experience": "18 years",
+    "timeSlots": [
+      "08:30 - 09:00 AM",
+      "09:30 - 10:30 AM",
+      "10:30 - 11:30 AM",
+      "12:00 - 01:00 PM",
+      "01:30 - 02:30 PM",
+      "03:00 - 04:00 PM",
+      "04:30 - 05:30 PM"
+    ]
+  }
+]
