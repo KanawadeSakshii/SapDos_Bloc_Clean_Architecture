@@ -106,6 +106,8 @@ class PatientScreen extends StatelessWidget {
                                           builder: (context) =>
                                               DoctorDetailsScreen(
                                             doctor: doctor,
+                                            doctorId: '',
+                                            // context.go('/patient/doctor/${doctor.id}');
                                           ),
                                         ),
                                       );

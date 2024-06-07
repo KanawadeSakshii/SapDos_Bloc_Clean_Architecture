@@ -1,13 +1,9 @@
 import 'package:bloc_project/core/theme/theme.dart';
-import 'package:bloc_project/features/auth/presentation/screens/login_screen.dart';
-import 'package:bloc_project/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:bloc_project/features/authenticate/presentation/bloc/auth_bloc.dart';
-import 'package:bloc_project/features/patient/presentation/pages/patient_screen.dart';
 import 'package:bloc_project/init_dependencies.dart';
 import 'package:bloc_project/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

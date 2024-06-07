@@ -1,5 +1,6 @@
 import 'package:bloc_project/features/auth/presentation/screens/signup_screen.dart';
 import 'package:bloc_project/features/doctor/presentation/pages/doctor_screen.dart';
+import 'package:bloc_project/features/patient/presentation/pages/doctor_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bloc_project/features/auth/presentation/screens/login_screen.dart';
@@ -32,13 +33,16 @@ final GoRouter appRouter = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             return const PatientScreen();
           },
-        ),
-        GoRoute(
-          path: 'doctor',
-          builder: (BuildContext context, GoRouterState state) {
-            return const DoctorScreen();
-          },
-        ),
+          // routes: <RouteBase>[
+          //   GoRoute(
+          //     path: 'doctor/:id',
+          //     builder: (BuildContext context, GoRouterState state) {
+          //       final doctorId = state.params['id']!;
+          //       return const DoctorDetailsScreen(doctorId: doctorId);
+          //     },
+          //   )
+          // ]),
+        )
       ],
     ),
   ],

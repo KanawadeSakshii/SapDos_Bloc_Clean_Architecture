@@ -12,8 +12,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
+  final String doctorId;
 
-  const DoctorDetailsScreen({Key? key, required this.doctor}) : super(key: key);
+  const DoctorDetailsScreen(
+      {Key? key, required this.doctor, required this.doctorId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +182,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                               spacing: 10,
                               runSpacing: 10,
                               children: doctor.timeSlots.map((timeSlot) {
-                                final isSlotAvailable = true;
+                                const isSlotAvailable = true;
                                 return SizedBox(
                                   width: (screenWidth - 90) / 5,
                                   child: InkWell(
@@ -215,7 +218,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                             child: Center(
                                               child: Text(
                                                 timeSlot,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: isSlotAvailable
                                                       ? AppPallete.gradient1
                                                       : Colors.red,
