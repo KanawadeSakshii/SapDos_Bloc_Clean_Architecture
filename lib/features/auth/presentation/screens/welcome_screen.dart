@@ -3,12 +3,11 @@ import 'package:bloc_project/core/theme/theme.dart';
 import 'package:bloc_project/features/auth/presentation/screens/login_screen.dart';
 import 'package:bloc_project/features/auth/presentation/screens/signup_screen.dart';
 import 'package:bloc_project/features/authenticate/presentation/widgets/auth_button.dart';
-import 'package:bloc_project/features/patient/presentation/pages/patient_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class MyWelcomePage extends StatelessWidget {
-  static const routeName = '/welcome';
+  //static const routeName = '/';
 
   const MyWelcomePage({super.key});
 
@@ -60,12 +59,13 @@ class MyWelcomePage extends StatelessWidget {
                         buttonText: 'LOGIN',
                         onTap: () {
                           // Navigator.pushNamed(context, '/login');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const LoginScreen(),
+                          //   ),
+                          // );
+                          context.go('/login');
                         },
                       ),
                       const SizedBox(
@@ -80,12 +80,13 @@ class MyWelcomePage extends StatelessWidget {
                         child: ElevatedButton(
                             onPressed: () {
                               // Navigator.pushNamed(context, '/signup');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SignupScreen(),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => const SignupScreen(),
+                              //   ),
+                              // );
+                              context.go('/signup');
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: AppPallete.transparentColor,

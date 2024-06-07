@@ -11,6 +11,7 @@ import 'package:bloc_project/features/doctor/presentation/pages/doctor_screen.da
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignupScreen extends StatelessWidget {
   static const routeName = '/signup';
@@ -82,11 +83,12 @@ class SignupScreen extends StatelessWidget {
                               if (state is AuthSuccess) {
                                 WidgetsBinding.instance
                                     .addPostFrameCallback((_) {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const DoctorScreen()));
+                                  // Navigator.pushReplacement(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             const DoctorScreen()));
+                                  context.go('/patient');
                                 });
                               }
                               return Column(

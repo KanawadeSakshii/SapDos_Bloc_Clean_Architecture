@@ -10,6 +10,7 @@ import 'package:bloc_project/features/doctor/presentation/pages/doctor_screen.da
 import 'package:bloc_project/features/patient/presentation/pages/patient_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
@@ -73,12 +74,13 @@ class LoginScreen extends StatelessWidget {
                               if (state is AuthSuccess) {
                                 WidgetsBinding.instance
                                     .addPostFrameCallback((_) {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PatientScreen()),
-                                  );
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           const PatientScreen()),
+                                  // );
+                                  context.go('/doctor');
                                 });
                               }
 
