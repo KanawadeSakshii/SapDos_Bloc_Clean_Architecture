@@ -3,7 +3,8 @@ import 'package:bloc_project/features/doctor/presentation/blocs/dropdown/bloc/dr
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_project/core/theme/app_pallete.dart';
-import 'package:bloc_project/features/doctor/presentation/pages/patient_details.dart';
+
+import '../pages/patient/patient_imports.dart';
 
 class CustomDropdownWidget extends StatelessWidget {
   final List<CustomDropdownItem> items;

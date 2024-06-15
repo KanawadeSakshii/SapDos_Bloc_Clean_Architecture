@@ -1,0 +1,15 @@
+import 'package:bloc_project/core/theme/app_pallete.dart';
+import 'package:bloc_project/features/doctor/presentation/widgets/dropdown_bar.dart';
+import 'package:bloc_project/features/patient/data/model/doctor_model.dart';
+import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_bloc.dart';
+import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_event.dart';
+import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_state.dart';
+import 'package:bloc_project/features/patient/presentation/widgets/appointment_details.dart';
+import 'package:bloc_project/features/patient/presentation/widgets/available_slots.dart';
+import 'package:bloc_project/features/patient/presentation/widgets/doctor_info_row.dart';
+import 'package:bloc_project/features/payment/pages/payment_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+part 'doctor_detail.dart';
+part 'doctor_details_android.dart';

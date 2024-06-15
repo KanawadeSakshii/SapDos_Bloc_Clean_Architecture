@@ -1,22 +1,16 @@
-import 'package:bloc_project/core/theme/app_pallete.dart';
-import 'package:bloc_project/features/doctor/presentation/blocs/PatientDetails/bloc/patientdetail_bloc.dart';
-import 'package:bloc_project/features/doctor/presentation/widgets/dropdown_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of 'patient_imports.dart';
 
 class PatientDetailsAndroid extends StatelessWidget {
   const PatientDetailsAndroid({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isAndroid = Theme.of(context).platform == TargetPlatform.android;
-    final double screenWidth = MediaQuery.of(context).size.width;
     return BlocProvider(
       create: (_) => PatientdetailBloc(),
       child: Scaffold(
         appBar: AppBar(),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
               Column(
@@ -112,10 +106,8 @@ class PatientDetailsAndroid extends StatelessWidget {
                   BlocBuilder<PatientdetailBloc, PatientdetailState>(
                     builder: (context, state) {
                       bool isHistoryExpanded = false;
-                      bool isPrescriptionExpanded = false;
                       if (state is PatientdetailToggle) {
                         isHistoryExpanded = state.isHistoryExpended;
-                        isPrescriptionExpanded = state.isPrescriptionExpanded;
                       }
                       return Column(
                         children: [

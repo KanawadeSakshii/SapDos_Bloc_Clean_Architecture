@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class AppPallete {
   static const Color backgroundColor = Colors.white;
   static const Color gradient1 = Color.fromRGBO(1, 26, 66, 1);
-  static const Color gradient2 = Color.fromRGBO(151, 156, 207, 1);
+  static const Color gradient2 = Color.fromRGBO(213, 224, 249, 1);
   static const Color gradient3 = Color.fromRGBO(250, 235, 105, 1);
-  static const Color gradient4 = Color.fromRGBO(208, 215, 229, 1);
+  static const Color gradient4 = Color.fromRGBO(201, 203, 226, 1);
   static const Color borderColor = Color.fromRGBO(52, 51, 67, 1);
   static const Color whiteColor = Colors.white;
   static const Color greyColor = Colors.grey;

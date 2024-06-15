@@ -1,22 +1,9 @@
-import 'package:bloc_project/core/theme/app_pallete.dart';
-import 'package:bloc_project/features/doctor/presentation/widgets/dropdown_bar.dart';
-import 'package:bloc_project/features/patient/data/model/doctor_model.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_bloc.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_event.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_state.dart';
-import 'package:bloc_project/features/patient/presentation/pages/doctor_details_android.dart';
-import 'package:bloc_project/features/payment/pages/payment_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+part of 'doctor_details_imports.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
-  final String doctorId;
 
-  const DoctorDetailsScreen(
-      {Key? key, required this.doctor, required this.doctorId})
-      : super(key: key);
+  const DoctorDetailsScreen({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -158,121 +145,19 @@ class DoctorDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 40),
                     const SizedBox(height: 20),
-                    Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            context
-                                .read<DoctorDetailsBloc>()
-                                .add(ToggleSlotExpansion());
-                          },
-                          child: const CustomAnimatedContainer(
-                            text: 'Available Slot',
-                            leadingIcon: Icons.history,
-                            trailingIcon: Icons.expand_more_rounded,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        if (state.isSlotExpanded)
-                          AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            height: null,
-                            child: Wrap(
-                              spacing: 10,
-                              runSpacing: 10,
-                              children: doctor.timeSlots.map((timeSlot) {
-                                const isSlotAvailable = true;
-                                return SizedBox(
-                                  width: (screenWidth - 90) / 5,
-                                  child: InkWell(
-                                    onTap: () {
-                                      doctorDetailsBloc
-                                          .add(SelectTimeSlot(timeSlot));
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.all(3),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Radio(
-                                            value: timeSlot,
-                                            groupValue: selectedTimeSlot,
-                                            onChanged: (value) {
-                                              doctorDetailsBloc.add(
-                                                  SelectTimeSlot(
-                                                      value as String));
-                                            },
-                                          ),
-                                          Container(
-                                            height: 50,
-                                            width: 160,
-                                            decoration: BoxDecoration(
-                                              color: isSlotAvailable
-                                                  ? AppPallete.gradient4
-                                                  : Colors.grey,
-                                              borderRadius:
-                                                  BorderRadius.circular(3),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                timeSlot,
-                                                style: const TextStyle(
-                                                  color: isSlotAvailable
-                                                      ? AppPallete.gradient1
-                                                      : Colors.red,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                      ],
+                    AvailableSlotsWidget(
+                      doctorDetailsBloc: doctorDetailsBloc,
+                      state: state,
+                      screenWidth: MediaQuery.of(context).size.width,
+                      doctor: doctor,
                     ),
                     const SizedBox(height: 20),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: AppPallete.gradient1,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          foregroundColor: AppPallete.whiteColor,
-                          backgroundColor: AppPallete.gradient1,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        onPressed: () {
-                          if (doctorDetailsBloc.state.selectedTimeSlot !=
-                              null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PaymentScreen(),
-                              ),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  "Please select a time slot.",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                        child: const Text("Book Appointment"),
+                    Center(
+                      child: BookAppointmentButton(
+                        doctorDetailsBloc: doctorDetailsBloc,
+                        state: state,
                       ),
                     ),
                   ],

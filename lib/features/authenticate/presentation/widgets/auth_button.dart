@@ -10,7 +10,7 @@ class AuthSubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: 250,
       decoration: BoxDecoration(
           color: AppPallete.gradient1, borderRadius: BorderRadius.circular(10)),
       child: ElevatedButton(
@@ -23,7 +23,7 @@ class AuthSubmitButton extends StatelessWidget {
           buttonText,
           style: const TextStyle(
               color: Colors.white,
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.w600,
               letterSpacing: 2),
         ),

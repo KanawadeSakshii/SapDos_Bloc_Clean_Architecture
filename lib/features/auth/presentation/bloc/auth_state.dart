@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../patient/data/model/doctor_model.dart';
+
 sealed class AuthState extends Equatable {
   @override
   List<Object> get props => [];

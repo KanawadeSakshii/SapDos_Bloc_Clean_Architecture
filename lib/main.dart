@@ -1,9 +1,11 @@
 import 'package:bloc_project/core/theme/theme.dart';
 import 'package:bloc_project/features/authenticate/presentation/bloc/auth_bloc.dart';
 import 'package:bloc_project/init_dependencies.dart';
-import 'package:bloc_project/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'routes/route_imports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,11 +25,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: AppTheme.lightThemeMode,
-      routerConfig: appRouter,
-    );
+    return ScreenUtilInit(
+        designSize: const Size(360, 844),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        useInheritedMediaQuery: true,
+        builder: (context, child) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: AppTheme.lightThemeMode,
+            routerConfig: appRouter,
+          );
+        });
   }
 }

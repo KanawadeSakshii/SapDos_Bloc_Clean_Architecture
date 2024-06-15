@@ -38,48 +38,46 @@ class _AuthFieldState extends State<AuthField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 300,
-      padding: EdgeInsets.all(1.5),
-      child: Container(
-        child: TextFormField(
-          controller: widget.controller,
-          decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-            hintText: widget.hintText,
-            prefixIcon: widget.prefixIcon != null
-                ? Icon(
-                    widget.prefixIcon,
-                    color: widget.iconColor,
-                  )
-                : null,
-            suffixIcon: widget.suffixIcon != null
-                ? IconButton(
-                    icon: Icon(
-                      isTextObscured ? Icons.visibility : Icons.visibility_off,
-                      color: AppPallete.greyColor,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isTextObscured = !isTextObscured;
-                      });
-                    },
-                  )
-                : null,
-            border: const OutlineInputBorder(),
-            focusColor: AppPallete.gradient1,
-            errorText: widget.errorText,
-          ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "${widget.hintText} is missing";
-            }
-            return null;
-          },
-          obscureText: isTextObscured,
-          onChanged: widget.onChanged,
+      child: TextFormField(
+        controller: widget.controller,
+        decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(fontSize: 12),
+          prefixIcon: widget.prefixIcon != null
+              ? Icon(
+                  widget.prefixIcon,
+                  color: widget.iconColor,
+                )
+              : null,
+          suffixIcon: widget.suffixIcon != null
+              ? IconButton(
+                  icon: Icon(
+                    isTextObscured ? Icons.visibility : Icons.visibility_off,
+                    color: AppPallete.greyColor,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isTextObscured = !isTextObscured;
+                    });
+                  },
+                )
+              : null,
+          enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppPallete.gradient1)),
+          focusedErrorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppPallete.errorColor)),
+          errorText: widget.errorText,
         ),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "${widget.hintText} is missing";
+          }
+          return null;
+        },
+        obscureText: isTextObscured,
+        onChanged: widget.onChanged,
       ),
     );
   }

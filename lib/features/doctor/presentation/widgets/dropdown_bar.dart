@@ -5,17 +5,20 @@ class CustomAnimatedContainer extends StatelessWidget {
   final String text;
   final IconData? leadingIcon;
   final IconData trailingIcon;
+  final VoidCallback? onTrailingIconTap;
 
   const CustomAnimatedContainer({
     Key? key,
     required this.text,
     this.leadingIcon,
     required this.trailingIcon,
+    this.onTrailingIconTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
+      height: 45,
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -45,10 +48,13 @@ class CustomAnimatedContainer extends StatelessWidget {
                 ),
               ],
             ),
-            Icon(
-              trailingIcon,
-              color: AppPallete.whiteColor,
-              size: 22,
+            IconButton(
+              onPressed: onTrailingIconTap,
+              icon: const Icon(
+                Icons.calendar_month_outlined,
+                color: AppPallete.whiteColor,
+                size: 22,
+              ),
             ),
           ],
         ),
