@@ -1,28 +1,42 @@
 part of 'doctor_details_imports.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
-  final DoctorModel doctor;
-
-  const DoctorDetailsScreen({super.key, required this.doctor});
+  // final DoctorModel doctor;
+  final String doctorId;
+  const DoctorDetailsScreen({
+    super.key,
+    required this.doctorId,
+  });
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth < 600) {
-      return DoctorDetailsAndroidState(doctor: doctor);
-    }
     return BlocProvider(
-      create: (context) => DoctorDetailsBloc(),
+      create: (context) => DoctorDetailsBloc(
+        serviceLocator<GetDoctorDetailsUseCase>(),
+        serviceLocator<GetDoctorByIdUseCase>(),
+      )..add(LoadDoctorById(doctorId)),
       child: Scaffold(
         appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 100, right: 100),
-            child: BlocBuilder<DoctorDetailsBloc, DoctorDetailsState>(
-              builder: (context, state) {
-                final doctorDetailsBloc = context.read<DoctorDetailsBloc>();
-                String? selectedTimeSlot = state.selectedTimeSlot;
-                return Column(
+        body: BlocBuilder<DoctorDetailsBloc, DoctorDetailsState>(
+          builder: (context, state) {
+            if (state.selectedDoctor == null) {
+              if (state.error != null) {
+                return Center(child: Text(state.error!));
+              }
+              return const Center(child: CircularProgressIndicator());
+            }
+            final DoctorModel doctorModel =
+                DoctorModel.fromDoctor(state.selectedDoctor!);
+            ;
+            final doctorDetailsBloc = context.read<DoctorDetailsBloc>();
+            if (screenWidth < 600) {
+              //  return DoctorDetailsAndroidState(doctor: doctor);
+            }
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 100, right: 100),
+                child: Column(
                   children: [
                     Row(
                       children: [
@@ -45,7 +59,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
-                                doctor.doctorImage,
+                                doctorModel.doctorImage,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -61,7 +75,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                   const Icon(Icons.person),
                                   const SizedBox(width: 10),
                                   Text(
-                                    doctor.doctorName,
+                                    doctorModel.doctorName,
                                     style: const TextStyle(
                                       color: AppPallete.gradient1,
                                       fontWeight: FontWeight.bold,
@@ -70,7 +84,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 80),
                                   RatingBarIndicator(
-                                    rating: doctor.rating.toDouble(),
+                                    rating: doctorModel.rating.toDouble(),
                                     itemBuilder: (context, index) => const Icon(
                                       Icons.star,
                                       color: Colors.amber,
@@ -90,7 +104,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                       Icons.assignment_turned_in_outlined),
                                   const SizedBox(width: 10),
                                   Text(
-                                    doctor.doctorSpecialization,
+                                    doctorModel.doctorSpecialization,
                                     style: const TextStyle(
                                       color: AppPallete.gradient1,
                                       fontWeight: FontWeight.normal,
@@ -108,7 +122,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                       const Icon(Icons.content_paste_sharp),
                                       const SizedBox(width: 10),
                                       Text(
-                                        doctor.education,
+                                        doctorModel.education,
                                         style: const TextStyle(
                                           color: AppPallete.gradient1,
                                           fontWeight: FontWeight.normal,
@@ -124,7 +138,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                           children: [
                                             const Icon(Icons.edit_document),
                                             const SizedBox(width: 10),
-                                            Text(doctor.experience),
+                                            Text(doctorModel.experience),
                                           ],
                                         ),
                                       ),
@@ -137,7 +151,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 10),
-                                  Text(doctor.description),
+                                  Text(doctorModel.description),
                                 ],
                               ),
                             ],
@@ -151,7 +165,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                       doctorDetailsBloc: doctorDetailsBloc,
                       state: state,
                       screenWidth: MediaQuery.of(context).size.width,
-                      doctor: doctor,
+                      doctor: doctorModel,
                     ),
                     const SizedBox(height: 20),
                     Center(
@@ -161,10 +175,10 @@ class DoctorDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                );
-              },
-            ),
-          ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

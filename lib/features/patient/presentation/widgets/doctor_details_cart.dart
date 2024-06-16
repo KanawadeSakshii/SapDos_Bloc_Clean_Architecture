@@ -1,8 +1,4 @@
-import 'package:bloc_project/core/theme/app_pallete.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+part of 'common_imports.dart';
 
 class DoctorDetailsCart extends StatelessWidget {
   final String doctorName;
@@ -21,7 +17,10 @@ class DoctorDetailsCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DoctorDetailsBloc(),
+      create: (context) => DoctorDetailsBloc(
+        serviceLocator<GetDoctorDetailsUseCase>(),
+        serviceLocator<GetDoctorByIdUseCase>(),
+      ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),

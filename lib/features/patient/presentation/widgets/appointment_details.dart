@@ -1,8 +1,4 @@
-import 'package:bloc_project/core/theme/app_pallete.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_bloc.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_state.dart';
-import 'package:flutter/material.dart';
-import '../../../payment/pages/payment_screen.dart';
+part of 'common_imports.dart';
 
 class BookAppointmentButton extends StatelessWidget {
   final DoctorDetailsBloc doctorDetailsBloc;
@@ -32,7 +28,7 @@ class BookAppointmentButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          if (state.selectedTimeSlot != null) {
+          if (state.selectedTimeSlot != null && state.selectedDate != null) {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -43,7 +39,7 @@ class BookAppointmentButton extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text(
-                  "Please select a time slot.",
+                  "Please select a time slot & Date",
                   style: TextStyle(color: Colors.red),
                 ),
               ),

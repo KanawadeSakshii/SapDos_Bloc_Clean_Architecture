@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'common_imports.dart';
 
 class InfoRowWidget extends StatelessWidget {
   final IconData icon;

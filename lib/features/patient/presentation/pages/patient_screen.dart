@@ -1,18 +1,19 @@
 part of 'patient_imports.dart';
 
 class PatientScreen extends StatelessWidget {
-  const PatientScreen({Key? key}) : super(key: key);
+  const PatientScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => DoctorDetailsBloc()..add(LoadDoctorDetails()),
+      create: (_) =>
+          serviceLocator<DoctorDetailsBloc>()..add(LoadDoctorDetails()),
       child: Scaffold(
         appBar: AppBar(),
         drawer: const DrawerWidget(),
         body: BlocBuilder<DoctorDetailsBloc, DoctorDetailsState>(
           builder: (context, state) {
-            if (state.doctor.isEmpty) {
+            if (state.doctors.isEmpty) {
               return const Loader();
             }
             return LayoutBuilder(
@@ -28,10 +29,10 @@ class PatientScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Column(
+                              Column(
                                 children: [
                                   Text(
                                     "Hello..!",
@@ -47,10 +48,10 @@ class PatientScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Container(
+                              SizedBox(
                                 height: 100,
                                 width: 100,
-                                child: const CircleAvatar(
+                                child: CircleAvatar(
                                   backgroundImage: AssetImage(
                                       'assets/patient/patient2man.jpg'),
                                 ),
@@ -86,21 +87,13 @@ class PatientScreen extends StatelessWidget {
                                   mainAxisSpacing: 30,
                                   childAspectRatio: 3,
                                 ),
-                                itemCount: state.doctor.length,
+                                itemCount: state.doctors.length,
                                 itemBuilder: (context, index) {
-                                  final doctor = state.doctor[index];
+                                  final doctor = state.doctors[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              DoctorDetailsScreen(
-                                            doctor: doctor,
-                                            // context.go('/patient/doctor/${doctor.id}');
-                                          ),
-                                        ),
-                                      );
+                                      context.go(
+                                          '/patient/doctor/${doctor.doctorUid}');
                                     },
                                     child: DoctorDetailsCart(
                                       doctorName: doctor.doctorName,

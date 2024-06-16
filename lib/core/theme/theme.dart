@@ -1,5 +1,6 @@
 import 'package:bloc_project/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static _border([Color color = AppPallete.borderColor]) => OutlineInputBorder(
@@ -24,14 +25,14 @@ class AppTheme {
     bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
   );
 
-  static const sapdos = Text(
-    "SAPDOS",
-    style: TextStyle(
-        fontFamily: 'Schyler',
-        color: AppPallete.gradient1,
-        fontSize: 30,
-        letterSpacing: 2,
-        fontWeight: FontWeight.w800),
+  static final sapdos = Text(
+    "SAPDOS", //amethysta
+    style: GoogleFonts.playfairDisplaySc(
+        textStyle: const TextStyle(
+            color: AppPallete.gradient1,
+            fontSize: 30,
+            fontWeight: FontWeight.w800)),
   );
+
   static double defaultpadding = 15;
 }

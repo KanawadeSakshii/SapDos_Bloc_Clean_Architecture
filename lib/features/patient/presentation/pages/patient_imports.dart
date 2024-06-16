@@ -4,8 +4,10 @@ import 'package:bloc_project/features/doctor/presentation/widgets/dropdown_bar.d
 import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_bloc.dart';
 import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_event.dart';
 import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_state.dart';
-import 'package:bloc_project/features/patient/presentation/pages/doctor_detail/doctor_details_imports.dart';
-import 'package:bloc_project/features/patient/presentation/widgets/doctor_details_cart.dart';
+import 'package:bloc_project/init_dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../widgets/common_imports.dart';
 part 'patient_screen.dart';

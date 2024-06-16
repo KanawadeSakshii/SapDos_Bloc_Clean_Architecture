@@ -7,6 +7,7 @@ part of 'doctor_model.dart';
 // **************************************************************************
 
 DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
+      doctorUid: json['doctorUid'] as String,
       doctorName: json['doctorName'] as String,
       doctorSpecialization: json['doctorSpecialization'] as String,
       doctorImage: json['doctorImage'] as String,
@@ -20,6 +21,7 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
 
 Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
     <String, dynamic>{
+      'doctorUid': instance.doctorUid,
       'doctorName': instance.doctorName,
       'doctorSpecialization': instance.doctorSpecialization,
       'doctorImage': instance.doctorImage,

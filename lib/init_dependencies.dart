@@ -4,6 +4,11 @@ import 'package:bloc_project/features/authenticate/data/datasources/auth_remote_
 import 'package:bloc_project/features/authenticate/domain/repository/auth_repo.dart';
 import 'package:bloc_project/features/authenticate/data/repoIMPL/auth_repo_impl.dart';
 import 'package:bloc_project/features/authenticate/presentation/bloc/auth_bloc.dart';
+import 'package:bloc_project/features/patient/data/repository/doctorrepoimpl.dart';
+import 'package:bloc_project/features/patient/domain/repository/doctorrepo.dart';
+import 'package:bloc_project/features/patient/domain/usecases/doctor_detail_usecase.dart';
+import 'package:bloc_project/features/patient/domain/usecases/get_doctor_by_id_use_case.dart';
+import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -42,5 +47,23 @@ void _initAuth() {
   serviceLocator.registerLazySingleton(() => AuthBloc(
         userSignUp: serviceLocator(),
         userLogin: serviceLocator(),
+      ));
+}
+
+// doctor
+void setupDoctorLocator() {
+  // Register use cases
+  serviceLocator
+      .registerLazySingleton(() => GetDoctorDetailsUseCase(serviceLocator()));
+  serviceLocator
+      .registerLazySingleton(() => GetDoctorByIdUseCase(serviceLocator()));
+  // Register repositories
+  serviceLocator
+      .registerLazySingleton<DoctorRepository>(() => DoctorRepositoryImpl());
+
+  // Register bloc
+  serviceLocator.registerFactory(() => DoctorDetailsBloc(
+        serviceLocator<GetDoctorDetailsUseCase>(),
+        serviceLocator<GetDoctorByIdUseCase>(),
       ));
 }

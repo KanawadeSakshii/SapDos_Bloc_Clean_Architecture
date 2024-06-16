@@ -1,10 +1,4 @@
-import 'package:bloc_project/core/theme/app_pallete.dart';
-import 'package:bloc_project/features/doctor/presentation/widgets/dropdown_bar.dart';
-import 'package:bloc_project/features/patient/data/model/doctor_model.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_bloc.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_event.dart';
-import 'package:bloc_project/features/patient/presentation/blocs/doctor_bloc/bloc/doctor_state.dart';
-import 'package:flutter/material.dart';
+part of 'common_imports.dart';
 
 class AvailableSlotsWidget extends StatelessWidget {
   final DoctorDetailsBloc doctorDetailsBloc;
@@ -40,7 +34,7 @@ class AvailableSlotsWidget extends StatelessWidget {
                 lastDate: DateTime(2100),
               );
               if (pickedDate != null) {
-                print('Picked Date: $pickedDate');
+                doctorDetailsBloc.add(SelectDate(pickedDate));
               }
             },
           ),

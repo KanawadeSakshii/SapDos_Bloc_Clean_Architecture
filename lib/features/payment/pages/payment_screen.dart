@@ -1,9 +1,13 @@
+import 'package:bloc_project/features/payment/widget/confirm_dialogbox.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_project/core/theme/app_pallete.dart';
 import 'package:bloc_project/core/theme/theme.dart';
 import 'package:bloc_project/features/payment/bloc/payment_bloc.dart';
 import 'package:bloc_project/features/payment/widget/payment_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../widget/payment_method.dart';
 
 class PaymentScreen extends StatelessWidget {
   PaymentScreen({Key? key}) : super(key: key);
@@ -36,9 +40,9 @@ class PaymentScreen extends StatelessWidget {
               flex: 3,
               child: Column(
                 children: [
-                  const SizedBox(height: 60),
+                  SizedBox(height: 50.h),
                   AppTheme.sapdos,
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   const Text(
                     "Booking Appointment",
                     style: TextStyle(
@@ -56,21 +60,9 @@ class PaymentScreen extends StatelessWidget {
                           selectedPaymentMethod = state.selectedPaymentMethod;
                         }
 
-                        return DropdownMenu(
-                          initialValue: selectedPaymentMethod,
-                          items: paymentMethods
-                              .map((method) => DropdownMenuItem(
-                                    value: method,
-                                    child: Text(method),
-                                  ))
-                              .toList(),
-                          onChanged: (String? newValue) {
-                            if (newValue != null) {
-                              context
-                                  .read<PaymentBloc>()
-                                  .add(SelectPaymentMethod(newValue));
-                            }
-                          },
+                        return PaymentDropdown(
+                          paymentMethods: paymentMethods,
+                          selectedPaymentMethod: selectedPaymentMethod,
                         );
                       },
                     ),
@@ -84,12 +76,12 @@ class PaymentScreen extends StatelessWidget {
                       if (state is PaymentMethodSelected) {
                         return Column(
                           children: [
-                            const SizedBox(height: 30),
+                            SizedBox(height: 30.h),
                             const Padding(
                               padding: EdgeInsets.all(10),
                               child: PaymentCard(),
                             ),
-                            const SizedBox(height: 30),
+                            SizedBox(height: 30.h),
                             Container(
                               decoration: BoxDecoration(
                                 color: AppPallete.gradient1,
@@ -111,51 +103,7 @@ class PaymentScreen extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        backgroundColor: AppPallete.gradient1,
-                                        contentPadding: EdgeInsets.all(0),
-                                        content: Container(
-                                          height: 300,
-                                          padding: EdgeInsets.all(16),
-                                          child: const Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.price_check_outlined,
-                                                size: 50,
-                                                color: AppPallete.whiteColor,
-                                              ),
-                                              SizedBox(height: 20),
-                                              Text(
-                                                "Your booking is confirmed",
-                                                style: TextStyle(
-                                                  color: AppPallete.whiteColor,
-                                                  fontSize: 18,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        actions: <Widget>[
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              foregroundColor:
-                                                  AppPallete.gradient1,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text(
-                                              "Oky.",
-                                              style: TextStyle(
-                                                  color: AppPallete.gradient1),
-                                            ),
-                                          ),
-                                        ],
-                                      );
+                                      return const PaymentConfirmationDialog();
                                     },
                                   );
                                 },
@@ -174,92 +122,6 @@ class PaymentScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class DropdownMenu extends StatelessWidget {
-  final String? initialValue;
-  final List<DropdownMenuItem<String>> items;
-  final ValueChanged<String?>? onChanged;
-
-  const DropdownMenu({
-    Key? key,
-    required this.items,
-    this.initialValue,
-    this.onChanged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PaymentBloc, PaymentState>(
-      builder: (context, state) {
-        bool isDropdownOpened = false;
-        if (state is DropdownState) {
-          isDropdownOpened = state.isDropdownOpened;
-        }
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () {
-                context.read<PaymentBloc>().add(ToggleDropdown());
-              },
-              child: Container(
-                height: 50,
-                width: 300,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppPallete.gradient1),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        initialValue ?? 'Select',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Icon(isDropdownOpened
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            if (isDropdownOpened)
-              Container(
-                height: 150,
-                width: 300,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        context.read<PaymentBloc>().add(ToggleDropdown());
-                        if (onChanged != null) {
-                          onChanged!(items[index].value);
-                        }
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 16),
-                        child: items[index].child,
-                      ),
-                    );
-                  },
-                ),
-              ),
-          ],
-        );
-      },
     );
   }
 }

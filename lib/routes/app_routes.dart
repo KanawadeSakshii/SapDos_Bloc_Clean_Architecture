@@ -22,20 +22,21 @@ final GoRouter appRouter = GoRouter(
           },
         ),
         GoRoute(
-          path: 'patient',
-          builder: (BuildContext context, GoRouterState state) {
-            return const PatientScreen();
-          },
-          // routes: <RouteBase>[
-          //   GoRoute(
-          //     path: 'doctor/:id',
-          //     builder: (BuildContext context, GoRouterState state) {
-          //       final doctorId = state.params['id']!;
-          //       return const DoctorDetailsScreen(doctorId: doctorId);
-          //     },
-          //   )
-          // ]),
-        ),
+            path: 'patient',
+            builder: (BuildContext context, GoRouterState state) {
+              return const PatientScreen();
+            },
+            routes: <RouteBase>[
+              GoRoute(
+                path: 'doctor/:id',
+                builder: (BuildContext context, GoRouterState state) {
+                  final doctorId = state.pathParameters['id']!;
+                  return DoctorDetailsScreen(
+                    doctorId: doctorId,
+                  );
+                },
+              )
+            ]),
         GoRoute(
           path: 'doctor',
           builder: (BuildContext context, GoRouterState state) {
