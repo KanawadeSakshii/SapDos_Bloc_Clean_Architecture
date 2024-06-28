@@ -8,7 +8,7 @@ class AuthField extends StatefulWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final Color? iconColor;
-  final void Function(dynamic value) onChanged;
+  final void Function(dynamic value)? onChanged;
   final String? errorText;
 
   const AuthField({
@@ -19,7 +19,7 @@ class AuthField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.iconColor,
-    required this.onChanged,
+    this.onChanged,
     this.errorText,
   }) : super(key: key);
 

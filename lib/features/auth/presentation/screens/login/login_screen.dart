@@ -1,16 +1,16 @@
 part of 'login_imports.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final signupKey = GlobalKey<FormState>();
 
+    final AuthBloc authBloc = serviceLocator<AuthBloc>();
+
     return BlocProvider(
-      create: (context) => AuthBloc(),
+      create: (context) => authBloc,
       child: Scaffold(
         backgroundColor: AppPallete.gradient4,
         body: Row(
@@ -68,13 +68,25 @@ class LoginScreen extends StatelessWidget {
                             const SizedBox(height: 30),
                             BlocBuilder<AuthBloc, AuthState>(
                               builder: (context, state) {
-                                if (state is AuthSuccess) {
-                                  WidgetsBinding.instance
-                                      .addPostFrameCallback((_) {
-                                    context.go('/doctor');
-                                  });
+                                if (state is AuthLoading) {
+                                  return const Loader();
+                                } else if (state is AuthSuccess) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Login Successful'),
+                                      backgroundColor: AppPallete.succesColor,
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                  return const SizedBox.shrink();
                                 }
-
+                                if (state is AuthFailure) {
+                                  if (state.errorCode ==
+                                      AuthErrorCode.invalidEmail) {
+                                  } else if (state.errorCode ==
+                                      AuthErrorCode.invalidPassword) {
+                                  } else {}
+                                }
                                 return Column(
                                   children: [
                                     AuthField(
@@ -119,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                                           BlocBuilder<AuthBloc, AuthState>(
                                             builder: (context, state) {
                                               bool rememberMe =
-                                                  state is AuthFormState
+                                                  state is AuthSuccess
                                                       ? state.rememberMe
                                                       : false;
 
@@ -168,13 +180,17 @@ class LoginScreen extends StatelessWidget {
                                         if (signupKey.currentState
                                                 ?.validate() ??
                                             false) {
-                                          context
-                                              .read<AuthBloc>()
-                                              .add(AuthLogin(
-                                                email: emailController.text,
-                                                password:
-                                                    passwordController.text,
-                                              ));
+                                          context.read<AuthBloc>().add(
+                                                LoginUser(
+                                                  login: UserLoginModel(
+                                                    userName:
+                                                        emailController.text,
+                                                    password:
+                                                        passwordController.text,
+                                                  ),
+                                                  context: context,
+                                                ),
+                                              );
                                         }
                                       },
                                     ),
@@ -221,4 +237,13 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void navigateToDoctorScreen(BuildContext context, String doctorUid) {
+  final currentDate = DateTime.now();
+
+  String formattedDate = DateFormat('yyyy-MM-dd').format(currentDate);
+  final fullDate = formattedDate;
+
+  context.go('/doctor/$doctorUid/$fullDate');
 }

@@ -6,6 +6,7 @@ import 'package:bloc_project/core/theme/theme.dart';
 import 'package:bloc_project/features/payment/bloc/payment_bloc.dart';
 import 'package:bloc_project/features/payment/widget/payment_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widget/payment_method.dart';
 
@@ -105,7 +106,9 @@ class PaymentScreen extends StatelessWidget {
                                     builder: (BuildContext context) {
                                       return const PaymentConfirmationDialog();
                                     },
-                                  );
+                                  ).then((value) {
+                                    context.go('/login');
+                                  });
                                 },
                                 child: const Text("Pay Now"),
                               ),

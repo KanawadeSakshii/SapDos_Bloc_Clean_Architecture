@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:bloc_project/core/theme/app_pallete.dart';
 
 class TodaysAppointment extends StatelessWidget {
-  final int tasks;
-  final int totalTasks;
+  final int pendingAppointment;
+  final int totalAppointment;
   final String heading;
 
   const TodaysAppointment({
     super.key,
-    required this.tasks,
-    required this.totalTasks,
+    required this.pendingAppointment,
+    required this.totalAppointment,
     required this.heading,
   });
 
   @override
   Widget build(BuildContext context) {
-    double completionPercentage = (tasks / totalTasks);
+    double completionPercentage =
+        totalAppointment != 0 ? (pendingAppointment / totalAppointment) : 0.0;
 
     return Container(
       decoration: BoxDecoration(
@@ -41,7 +42,7 @@ class TodaysAppointment extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  text: '$tasks',
+                  text: '$pendingAppointment',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -49,7 +50,7 @@ class TodaysAppointment extends StatelessWidget {
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: '/$totalTasks',
+                      text: '/$totalAppointment',
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.normal,

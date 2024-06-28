@@ -1,19 +1,18 @@
 import 'package:bloc_project/core/theme/app_pallete.dart';
 import 'package:bloc_project/core/theme/theme.dart';
-import 'package:bloc_project/features/authenticate/presentation/widgets/auth_button.dart';
+import 'package:bloc_project/features/auth/presentation/widgets/auth_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyWelcomePage extends StatelessWidget {
-  //static const routeName = '/';
-
   const MyWelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppPallete.gradient4,
       body: Row(
         children: [
           if (MediaQuery.of(context).size.width > 600)
@@ -28,14 +27,13 @@ class MyWelcomePage extends StatelessWidget {
             flex: 3,
             child: Center(
               child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.r),
-                    bottomLeft: Radius.circular(10.r),
-                  ),
-                ),
+                decoration: const BoxDecoration(
+                    color: AppPallete.whiteColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        bottomLeft: Radius.circular(20))),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 200.0),
                   child: Column(
                     children: [
                       SizedBox(

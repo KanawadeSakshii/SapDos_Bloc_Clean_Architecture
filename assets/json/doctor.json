@@ -1,6 +1,6 @@
 [
   {
-    "doctorUid": "1",
+    "doctorid": "1",
     "doctorName": "Dr. John Doe",
     "doctorSpecialization": "Cardiologist",
     "doctorImage": "assets/doctor/doctor4men.jpg",
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "doctorUid": "2",
+    "doctorid": "2",
     "doctorName": "Dr. Jane Smith",
     "doctorSpecialization": "Dermatologist",
     "doctorImage": "assets/doctor/doctor6man.jpg",
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "doctorUid": "3",
+    "doctorid": "3",
     "doctorName": "Dr. Alex Brown",
     "doctorSpecialization": "Pediatrician",
     "doctorImage": "assets/doctor/doctor2women.jpg",
@@ -58,7 +58,7 @@
     ]
   },
   {
-    "doctorUid": "4",
+    "doctorid": "4",
     "doctorName": "Dr. Emily White",
     "doctorSpecialization": "Neurologist",
     "doctorImage": "assets/doctor/doctor3women.jpg",
@@ -77,7 +77,7 @@
     ]
   },
   {
-    "doctorUid": "5",
+    "doctorid": "5",
     "doctorName": "Dr. Michael Green",
     "doctorSpecialization": "Orthopedic Surgeon",
     "doctorImage": "assets/doctor/doctor7man.jpg",
@@ -96,7 +96,7 @@
     ]
   },
   {
-    "doctorUid": "6",
+    "doctorid": "6",
     "doctorName": "Dr. AnnA Green",
     "doctorSpecialization": "Orthopedic Surgeon",
     "doctorImage": "assets/doctor/doctor5weman.jpg",

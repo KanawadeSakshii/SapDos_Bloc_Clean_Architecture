@@ -12,7 +12,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'login',
           builder: (BuildContext context, GoRouterState state) {
-            return const LoginScreen();
+            return LoginScreen();
           },
         ),
         GoRoute(
@@ -22,25 +22,36 @@ final GoRouter appRouter = GoRouter(
           },
         ),
         GoRoute(
-            path: 'patient',
+            path: 'patient/:uId',
             builder: (BuildContext context, GoRouterState state) {
-              return const PatientScreen();
+              final String patientUid = state.pathParameters['uId']!;
+              return PatientScreen(
+                uId: patientUid,
+              );
             },
             routes: <RouteBase>[
               GoRoute(
-                path: 'doctor/:id',
+                path: 'doctor_details/:doctorId/:patientId',
                 builder: (BuildContext context, GoRouterState state) {
-                  final doctorId = state.pathParameters['id']!;
+                  final doctorId = state.pathParameters['doctorId']!;
+                  final patientId = state.pathParameters['patientId']!;
+
                   return DoctorDetailsScreen(
-                    doctorId: doctorId,
+                    doctorUId: doctorId,
+                    patientUId: patientId,
                   );
                 },
               )
             ]),
         GoRoute(
-          path: 'doctor',
+          path: 'doctor/:uId/:date',
           builder: (BuildContext context, GoRouterState state) {
-            return const DoctorScreen();
+            final String doctorUid = state.pathParameters['uId']!;
+            final String date = state.pathParameters['date']!;
+            return DoctorScreen(
+              uId: doctorUid,
+              date: date,
+            );
           },
         ),
       ],

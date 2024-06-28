@@ -1,0 +1,27 @@
+import 'package:bloc_project/features/auth/data/repositories/register_repo_impl.dart';
+import 'package:bloc_project/features/auth/domain/repositories/userRepository.dart';
+import 'package:bloc_project/features/auth/domain/usecases/auth_sign_up_usecase.dart';
+import 'package:bloc_project/features/auth/domain/usecases/user_login_usecase.dart';
+import 'package:bloc_project/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:bloc_project/features/doctor/data/remote_datasource/doctor_remote_data_source.dart';
+import 'package:bloc_project/features/doctor/data/repositories/doctor_dashboard_impl.dart';
+import 'package:bloc_project/features/doctor/data/repositories/patient_repo_impl.dart';
+import 'package:bloc_project/features/doctor/domain/Usecase/get_doctor_dashboard_usecase.dart';
+import 'package:bloc_project/features/doctor/domain/Usecase/get_doctor_usecase.dart';
+import 'package:bloc_project/features/doctor/domain/Usecase/get_patient_appointment_usecase.dart';
+import 'package:bloc_project/features/doctor/domain/repositories/patient_repo.dart';
+import 'package:bloc_project/features/doctor/presentation/blocs/doctor_dashboard/bloc/doctor_dashboard_bloc.dart';
+import 'package:bloc_project/features/patient/data/datasource_patient/remote_data_source_patient.dart';
+import 'package:bloc_project/features/patient/data/repository/doctorrepoimpl.dart';
+import 'package:bloc_project/features/patient/domain/repository/doctorrepo.dart';
+import 'package:bloc_project/features/patient/domain/usecases/book_appoitment_usecase.dart';
+import 'package:bloc_project/features/patient/domain/usecases/get_all_doctor_usecase.dart';
+import 'package:bloc_project/features/patient/domain/usecases/get_available_slots_usecase.dart';
+import 'package:bloc_project/features/patient/presentation/blocs/doctor_details/bloc/doctor_details_bloc.dart';
+import 'package:bloc_project/features/patient/presentation/blocs/patient_bloc/patient_bloc.dart';
+import 'package:bloc_project/routes/route_imports.dart';
+import 'package:bloc_project/utils/setuplogger.dart';
+import 'package:get_it/get_it.dart';
+import 'package:logging/logging.dart';
+
+part 'init_dependencies.dart';

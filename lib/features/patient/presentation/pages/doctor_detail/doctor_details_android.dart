@@ -1,20 +1,37 @@
 // part of 'doctor_details_imports.dart';
 
 // class DoctorDetailsAndroidState extends StatelessWidget {
-//   final DoctorModel doctor;
+//   final String doctorId;
 
-//   const DoctorDetailsAndroidState({super.key, required this.doctor});
+//   const DoctorDetailsAndroidState({
+//     super.key,
+//     required this.doctorId,
+//   });
 
 //   @override
 //   Widget build(BuildContext context) {
 //     return BlocProvider(
-//       create: (context) => DoctorDetailsBloc(),
+//       create: (context) => DoctorDetailsBloc(
+//         // serviceLocator<GetAllDoctorDetailsUseCase>(),
+//         serviceLocator<GetDoctorByUIdUseCase>(),
+//         serviceLocator<GetAvailableSlotsUseCase>(),
+//         serviceLocator<BookAppointmentUseCase>(),
+//       )..add(LoadDoctorById(doctorId)),
 //       child: Scaffold(
 //         appBar: AppBar(),
 //         body: Padding(
 //           padding: const EdgeInsets.all(10.0),
 //           child: BlocBuilder<DoctorDetailsBloc, DoctorDetailsState>(
 //             builder: (context, state) {
+//               if (state.selectedDoctor == null) {
+//                 if (state.error != null) {
+//                   return Center(child: Text(state.error!));
+//                 }
+//                 return const Center(child: CircularProgressIndicator());
+//               }
+//               final DoctorModel doctorModel =
+//                   DoctorModel.fromDoctor(state.selectedDoctor!);
+
 //               final doctorDetailsBloc = context.read<DoctorDetailsBloc>();
 //               return Column(
 //                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +39,7 @@
 //                     Center(
 //                       child: CircleAvatar(
 //                         radius: 50,
-//                         backgroundImage: AssetImage(doctor.doctorImage),
+//                         backgroundImage: AssetImage(doctorModel.doctorImage),
 //                       ),
 //                     ),
 //                     const SizedBox(height: 16),
@@ -34,7 +51,7 @@
 //                           children: [
 //                             InfoRowWidget(
 //                               icon: Icons.person,
-//                               text: doctor.doctorName,
+//                               text: doctorModel.doctorName,
 //                               textStyle: const TextStyle(
 //                                 color: AppPallete.gradient1,
 //                                 fontWeight: FontWeight.bold,
@@ -43,7 +60,7 @@
 //                             ),
 //                             const SizedBox(width: 80),
 //                             RatingBarIndicator(
-//                               rating: doctor.rating,
+//                               rating: doctorModel.rating,
 //                               itemBuilder: (context, index) => const Icon(
 //                                 Icons.star,
 //                                 color: Colors.amber,
@@ -59,7 +76,7 @@
 //                         const SizedBox(height: 10),
 //                         InfoRowWidget(
 //                           icon: Icons.assignment_turned_in_outlined,
-//                           text: doctor.doctorSpecialization,
+//                           text: doctorModel.doctorSpecialization,
 //                           textStyle: const TextStyle(
 //                             color: AppPallete.gradient1,
 //                             fontWeight: FontWeight.normal,
@@ -74,7 +91,7 @@
 //                               children: [
 //                                 InfoRowWidget(
 //                                   icon: Icons.content_paste_sharp,
-//                                   text: doctor.education,
+//                                   text: doctorModel.education,
 //                                   textStyle: const TextStyle(
 //                                     color: AppPallete.gradient1,
 //                                     fontWeight: FontWeight.normal,
@@ -90,7 +107,7 @@
 //                                     children: [
 //                                       const Icon(Icons.edit_document),
 //                                       const SizedBox(width: 10),
-//                                       Text(doctor.experience),
+//                                       Text(doctorModel.experience),
 //                                     ],
 //                                   ),
 //                                 ),
@@ -102,7 +119,7 @@
 //                               style: TextStyle(fontWeight: FontWeight.bold),
 //                             ),
 //                             const SizedBox(height: 10),
-//                             Text(doctor.description),
+//                             Text(doctorModel.description),
 //                           ],
 //                         ),
 //                         const SizedBox(height: 40),
@@ -111,7 +128,7 @@
 //                           doctorDetailsBloc: doctorDetailsBloc,
 //                           state: state,
 //                           screenWidth: MediaQuery.of(context).size.width,
-//                           doctor: doctor,
+//                           doctor: doctorModel,
 //                         ),
 //                         const SizedBox(height: 20),
 //                         Center(
