@@ -84,8 +84,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       final result = await login.loginUser(event.login);
       result.fold(
-          (failure) => emit(AuthFailure(
-              message: failure,
+          (failure) => emit(const AuthFailure(
+              message: 'invalid Data',
               errorCode: AuthErrorCode.loginError)), (userData) {
         final role = userData['role'] as String;
         final uid = userData['uId'];

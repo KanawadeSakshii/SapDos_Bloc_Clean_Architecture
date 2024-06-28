@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:bloc_project/features/auth/presentation/screens/welcome_screen.dart';
+import 'package:intl/intl.dart';
 
 import '../features/auth/presentation/screens/register/signup_imports.dart';
 part 'app_routes.dart';

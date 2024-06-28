@@ -58,3 +58,9 @@ final GoRouter appRouter = GoRouter(
     ),
   ],
 );
+void navigateToDoctorScreen(BuildContext context, String doctorUid) {
+  final currentDate = DateTime.now();
+  String formattedDate = DateFormat('yyyy-MM-dd').format(currentDate);
+  final fullDate = formattedDate;
+  context.go('/doctor/$doctorUid/$fullDate');
+}

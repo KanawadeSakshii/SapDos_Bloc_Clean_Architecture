@@ -66,10 +66,9 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 30),
-                            BlocBuilder<AuthBloc, AuthState>(
-                              builder: (context, state) {
+                            BlocListener<AuthBloc, AuthState>(
+                              listener: (context, state) {
                                 if (state is AuthLoading) {
-                                  return const Loader();
                                 } else if (state is AuthSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
@@ -78,151 +77,157 @@ class LoginScreen extends StatelessWidget {
                                       duration: Duration(seconds: 2),
                                     ),
                                   );
-                                  return const SizedBox.shrink();
-                                }
-                                if (state is AuthFailure) {
-                                  if (state.errorCode ==
-                                      AuthErrorCode.invalidEmail) {
-                                  } else if (state.errorCode ==
-                                      AuthErrorCode.invalidPassword) {
-                                  } else {}
-                                }
-                                return Column(
-                                  children: [
-                                    AuthField(
-                                      hintText: 'Enter Email',
-                                      controller: emailController,
-                                      prefixIcon: Icons.email,
-                                      iconColor: AppPallete.gradient1,
-                                      onChanged: (value) => context
-                                          .read<AuthBloc>()
-                                          .add(AuthEmailChanged(value)),
-                                      errorText: state is AuthFormState &&
-                                              !state.isEmailValid
-                                          ? 'Invalid email'
-                                          : null,
+                                } else if (state is AuthFailure) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(state.message),
+                                      backgroundColor: AppPallete.errorColor,
+                                      duration: Duration(seconds: 2),
                                     ),
-                                    const SizedBox(height: 15),
-                                    AuthField(
-                                      hintText: 'Enter Password',
-                                      isObscureText: true,
-                                      controller: passwordController,
-                                      prefixIcon: Icons.lock,
-                                      suffixIcon: Icons.visibility,
-                                      iconColor: AppPallete.gradient1,
-                                      onChanged: (value) => context
-                                          .read<AuthBloc>()
-                                          .add(AuthPasswordChanged(value)),
-                                      errorText: state is AuthFormState &&
-                                              !state.isPasswordValid
-                                          ? 'Invalid password'
-                                          : null,
-                                    ),
-                                    const SizedBox(height: 15),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width >
-                                              600
-                                          ? 300
-                                          : double.infinity,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          BlocBuilder<AuthBloc, AuthState>(
-                                            builder: (context, state) {
-                                              bool rememberMe =
-                                                  state is AuthSuccess
-                                                      ? state.rememberMe
-                                                      : false;
-
-                                              return Row(
-                                                children: [
-                                                  Checkbox(
-                                                    value: rememberMe,
-                                                    onChanged: (value) {
-                                                      context
-                                                          .read<AuthBloc>()
-                                                          .add(
-                                                              RememberMeChanged(
-                                                                  value!));
-                                                    },
-                                                    activeColor:
-                                                        AppPallete.gradient1,
-                                                  ),
-                                                  const Text(
-                                                    "Remember Me",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                          TextButton(
-                                            onPressed: () {},
-                                            child: const Text(
-                                              "Forgotten Password?",
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: AppPallete.gradient1,
-                                                decoration:
-                                                    TextDecoration.underline,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                  );
+                                }
+                              },
+                              child: BlocBuilder<AuthBloc, AuthState>(
+                                builder: (context, state) {
+                                  return Column(
+                                    children: [
+                                      AuthField(
+                                        hintText: 'Enter Email',
+                                        controller: emailController,
+                                        prefixIcon: Icons.email,
+                                        iconColor: AppPallete.gradient1,
+                                        onChanged: (value) => context
+                                            .read<AuthBloc>()
+                                            .add(AuthEmailChanged(value)),
+                                        errorText: state is AuthFormState &&
+                                                !state.isEmailValid
+                                            ? 'Invalid email'
+                                            : null,
                                       ),
-                                    ),
-                                    SizedBox(height: 60.h),
-                                    AuthSubmitButton(
-                                      buttonText: 'Login',
-                                      onTap: () {
-                                        if (signupKey.currentState
-                                                ?.validate() ??
-                                            false) {
-                                          context.read<AuthBloc>().add(
-                                                LoginUser(
-                                                  login: UserLoginModel(
-                                                    userName:
-                                                        emailController.text,
-                                                    password:
-                                                        passwordController.text,
-                                                  ),
-                                                  context: context,
-                                                ),
-                                              );
-                                        }
-                                      },
-                                    ),
-                                    const SizedBox(height: 15),
-                                    InkWell(
-                                      onTap: () {
-                                        context.go("/signup");
-                                      },
-                                      child: RichText(
-                                        text: TextSpan(
-                                          text: "Not on SapDos ?",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium,
+                                      const SizedBox(height: 15),
+                                      AuthField(
+                                        hintText: 'Enter Password',
+                                        isObscureText: true,
+                                        controller: passwordController,
+                                        prefixIcon: Icons.lock,
+                                        suffixIcon: Icons.visibility,
+                                        iconColor: AppPallete.gradient1,
+                                        onChanged: (value) => context
+                                            .read<AuthBloc>()
+                                            .add(AuthPasswordChanged(value)),
+                                        errorText: state is AuthFormState &&
+                                                !state.isPasswordValid
+                                            ? 'Invalid password'
+                                            : null,
+                                      ),
+                                      const SizedBox(height: 15),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width >
+                                                    600
+                                                ? 300
+                                                : double.infinity,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            TextSpan(
-                                              text: ' Sign-Up ',
-                                              style: const TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                              ).copyWith(
-                                                color: AppPallete.gradient1,
-                                                fontWeight: FontWeight.bold,
+                                            BlocBuilder<AuthBloc, AuthState>(
+                                              builder: (context, state) {
+                                                bool rememberMe =
+                                                    state is AuthSuccess
+                                                        ? state.rememberMe
+                                                        : false;
+
+                                                return Row(
+                                                  children: [
+                                                    Checkbox(
+                                                      value: rememberMe,
+                                                      onChanged: (value) {
+                                                        context
+                                                            .read<AuthBloc>()
+                                                            .add(
+                                                                RememberMeChanged(
+                                                                    value!));
+                                                      },
+                                                      activeColor:
+                                                          AppPallete.gradient1,
+                                                    ),
+                                                    const Text(
+                                                      "Remember Me",
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                            TextButton(
+                                              onPressed: () {},
+                                              child: const Text(
+                                                "Forgotten Password?",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: AppPallete.gradient1,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
+                                      const SizedBox(height: 60),
+                                      AuthSubmitButton(
+                                        buttonText: 'Login',
+                                        onTap: () {
+                                          if (signupKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            context.read<AuthBloc>().add(
+                                                  LoginUser(
+                                                    login: UserLoginModel(
+                                                      userName:
+                                                          emailController.text,
+                                                      password:
+                                                          passwordController
+                                                              .text,
+                                                    ),
+                                                    context: context,
+                                                  ),
+                                                );
+                                          }
+                                        },
+                                      ),
+                                      const SizedBox(height: 15),
+                                      InkWell(
+                                        onTap: () {
+                                          context.go("/signup");
+                                        },
+                                        child: RichText(
+                                          text: TextSpan(
+                                            text: "Not on SapDos ?",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                            children: [
+                                              TextSpan(
+                                                text: ' Sign-Up ',
+                                                style: const TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ).copyWith(
+                                                  color: AppPallete.gradient1,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -237,13 +242,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-void navigateToDoctorScreen(BuildContext context, String doctorUid) {
-  final currentDate = DateTime.now();
-
-  String formattedDate = DateFormat('yyyy-MM-dd').format(currentDate);
-  final fullDate = formattedDate;
-
-  context.go('/doctor/$doctorUid/$fullDate');
 }
