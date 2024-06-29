@@ -7,8 +7,14 @@ void navigateTo(String routeName) {
 
 void setupAuthLocator() {
   serviceLocator.registerLazySingleton<Logger>(() => logger);
-  serviceLocator
-      .registerLazySingleton<UserRepository>(() => UserRepositoryImpl());
+  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(() =>
+      AuthRemoteDataSource(
+          baseUrl: 'https://sapdos-api-v2.azurewebsites.net/api'));
+
+  // User Repository
+  serviceLocator.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
+      remoteDataSource: serviceLocator<AuthRemoteDataSource>()));
+
   serviceLocator.registerFactory<RegisterUseCase>(
       () => RegisterUseCase(serviceLocator<UserRepository>()));
   serviceLocator.registerFactory<LoginUseCase>(
