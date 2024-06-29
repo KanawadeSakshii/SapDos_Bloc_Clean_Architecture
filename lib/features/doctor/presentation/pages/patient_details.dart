@@ -48,7 +48,7 @@ class PatientDetailsScreen extends StatelessWidget {
                   child: Text(state.message),
                 );
               } else {
-                return Container(); // Placeholder for other states if needed
+                return Container();
               }
             },
           ),

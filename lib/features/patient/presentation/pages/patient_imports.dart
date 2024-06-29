@@ -3,7 +3,6 @@ import 'package:bloc_project/core/common/widget/loader.dart';
 import 'package:bloc_project/dependencies/dependescies_imports.dart';
 import 'package:bloc_project/features/doctor/data/models/doctor_model.dart';
 import 'package:bloc_project/features/doctor/presentation/widgets/dropdown_bar.dart';
-import 'package:bloc_project/features/patient/domain/entity/doctor.dart';
 import 'package:bloc_project/features/patient/presentation/blocs/doctor_details/bloc/doctor_details_bloc.dart';
 import 'package:bloc_project/features/patient/presentation/blocs/patient_bloc/patient_bloc.dart';
 import 'package:bloc_project/features/patient/presentation/pages/doctor_detail/doctor_details_imports.dart';

@@ -40,7 +40,7 @@ class BookAppointmentButton extends StatelessWidget {
                 patientUId: patientUId,
                 doctorUId: '${selectedDoctor.uId}',
                 appointmentDate: DateFormat('yyyy-MM-dd').format(selectedDate),
-                appointmentTime: selectedTimeSlot, // Ensure this is a String
+                appointmentTime: selectedTimeSlot,
               );
               logger.info('Booking appointment with the following details:');
               logger.info('Patient UID: $patientUId');

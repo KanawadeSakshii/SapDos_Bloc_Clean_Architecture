@@ -24,43 +24,7 @@ class DoctorDashboardBloc
     on<LoadDoctorDashboard>(_onLoadDoctorDashboard);
     on<LoadDoctor>(_onLoadDoctor);
   }
-  // Future<void> _onLoadDoctorDashboard(
-  //   LoadDoctorDashboard event,
-  //   Emitter<DoctorDashboardState> emit,
-  // ) async {
-  //   emit(DoctorDashboardLoading());
-  //   logger.severe(
-  //       'Loading Doctor Dashboard for UID: ${event.doctorUid} on Date: ${event.date}');
 
-  //   final doctorResult = await getDoctorByIdUseCase(event.doctorUid);
-  //   logger.severe('Doctor Result: ${doctorResult.toString()}');
-
-  //   final dashboardResult =
-  //       await getDoctorDashboardUsecase(event.doctorUid, event.date);
-  //   logger.severe('Dashboard Result: ${dashboardResult.toString()}');
-
-  //   final doctorData = doctorResult.fold(
-  //     (failure) {
-  //       logger.severe('Doctor loading failed: $failure');
-  //       return DoctorModel(); // Default or empty model
-  //     },
-  //     (doctor) => doctor,
-  //   );
-
-  //   final dashboardData = dashboardResult.fold(
-  //     (failure) {
-  //       logger.severe('Dashboard loading failed: $failure');
-  //       emit(DoctorDashboardError(failure));
-  //       return null;
-  //     },
-  //     (dashboard) => dashboard,
-  //   );
-
-  //   if (dashboardData != null) {
-  //     logger.severe('Emitting Dashboard Data: ${dashboardData.toString()}');
-  //     emit(DoctorDashboardLoaded(dashboardData, doctorData));
-  //   }
-  // }
   Future<void> _onLoadDoctorDashboard(
     LoadDoctorDashboard event,
     Emitter<DoctorDashboardState> emit,

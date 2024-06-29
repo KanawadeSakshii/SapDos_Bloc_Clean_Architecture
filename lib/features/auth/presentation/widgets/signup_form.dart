@@ -149,7 +149,6 @@ class SignupForm extends StatelessWidget {
               AuthSubmitButton(
                 buttonText: 'Sign Up',
                 onTap: () {
-                  // Validate the form using the GlobalKey
                   if (signupKey.currentState?.validate() ?? false) {
                     context.read<AuthBloc>().add(
                           RegisterRequested(

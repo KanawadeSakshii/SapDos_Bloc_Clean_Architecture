@@ -56,8 +56,7 @@ class CustomAnimatedContainer extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  onPressed:
-                      onTrailingIconTap, // Optional: handle trailing icon tap if needed
+                  onPressed: onTrailingIconTap,
                   icon: Icon(
                     trailingIcon,
                     color: Colors.white,

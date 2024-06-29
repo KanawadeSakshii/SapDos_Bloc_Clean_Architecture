@@ -1,15 +1,14 @@
-part of 'doctor_imports.dart'; // Import intl package for date formatting
+part of 'doctor_imports.dart';
 
 class DoctorScreen extends StatelessWidget {
   final String uId;
-  final String date; // Ensure this is in 'YYYY-MM-DD' format
+  final String date;
 
   const DoctorScreen({Key? key, required this.uId, required this.date})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Format date if it's not in 'YYYY-MM-DD' format
     final formattedDate = _formatDate(date);
 
     return Scaffold(
