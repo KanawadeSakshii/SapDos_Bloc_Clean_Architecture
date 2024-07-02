@@ -9,10 +9,10 @@ class UserRepositoryImpl implements UserRepository {
 
   UserRepositoryImpl({required this.remoteDataSource});
 
-  @override
-  Future<bool> checkUserExists(String email) async {
-    return await remoteDataSource.checkUserExists(email);
-  }
+  // @override
+  // Future<bool> checkUserExists(String email) async {
+  //   return await remoteDataSource.checkUserExists(email);
+  // }
 
   @override
   Future<Either<String, UserModel>> registerUser(UserModel user) async {

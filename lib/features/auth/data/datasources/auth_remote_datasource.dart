@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bloc_project/core/constants/constants.dart';
 import 'package:bloc_project/features/auth/data/model/user_login_model.dart';
 import 'package:bloc_project/features/auth/data/model/user_model.dart';
 import 'package:bloc_project/utils/setuplogger.dart';
@@ -6,27 +7,25 @@ import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRemoteDataSource {
-  final String baseUrl;
+  AuthRemoteDataSource();
 
-  AuthRemoteDataSource({required this.baseUrl});
-
-  Future<bool> checkUserExists(String email) async {
-    final url = Uri.parse('$baseUrl/Users/CheckUserExists?email=$email');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        return responseData['exists'] ?? false;
-      } else {
-        throw Exception('Failed to check user existence');
-      }
-    } catch (e) {
-      throw Exception('Failed to check user existence: $e');
-    }
-  }
+  // Future<bool> checkUserExists(String email) async {
+  //   final url = Uri.parse('$baseUrl/Users/CheckUserExists?email=$email');
+  //   try {
+  //     final response = await http.get(url);
+  //     if (response.statusCode == 200) {
+  //       final responseData = jsonDecode(response.body);
+  //       return responseData['exists'] ?? false;
+  //     } else {
+  //       throw Exception('Failed to check user existence');
+  //     }
+  //   } catch (e) {
+  //     throw Exception('Failed to check user existence: $e');
+  //   }
+  // }
 
   Future<Either<String, UserModel>> registerUser(UserModel user) async {
-    final url = Uri.parse('$baseUrl/Credentials/Register');
+    final url = Uri.parse(ApiConfig.register);
     try {
       logger.info('About to make HTTP POST request');
 
@@ -52,7 +51,7 @@ class AuthRemoteDataSource {
 
   Future<Either<String, Map<String, dynamic>>> loginUser(
       UserLoginModel login) async {
-    final url = Uri.parse('$baseUrl/Credentials/Login');
+    final url = Uri.parse(ApiConfig.login);
     try {
       logger.info('About to make HTTP POST request for login');
 

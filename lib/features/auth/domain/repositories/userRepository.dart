@@ -5,5 +5,5 @@ import 'package:fpdart/fpdart.dart';
 abstract class UserRepository {
   Future<Either<String, UserModel>> registerUser(UserModel user);
   Future<Either<String, Map<String, dynamic>>> loginUser(UserLoginModel login);
-  Future<bool> checkUserExists(String email);
+  //Future<bool> checkUserExists(String email);
 }

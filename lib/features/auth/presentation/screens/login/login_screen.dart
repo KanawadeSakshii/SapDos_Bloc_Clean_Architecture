@@ -69,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                             BlocListener<AuthBloc, AuthState>(
                               listener: (context, state) {
                                 if (state is AuthLoading) {
+                                  const Loader();
                                 } else if (state is AuthSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(

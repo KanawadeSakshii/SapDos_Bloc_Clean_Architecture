@@ -173,6 +173,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final currentState =
         state is AuthFormState ? state as AuthFormState : AuthFormState();
     final newRole = event.role == 'doctor' ? UserRole.doctor : UserRole.patient;
+
     emit(currentState.copyWith(role: newRole));
   }
 }

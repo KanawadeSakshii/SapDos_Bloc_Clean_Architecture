@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bloc_project/core/constants/constants.dart';
 import 'package:bloc_project/core/error/failure.dart';
 import 'package:bloc_project/features/doctor/data/models/doctor_dashboard_model.dart';
 import 'package:bloc_project/features/doctor/data/models/doctor_model.dart';
@@ -10,9 +11,7 @@ import 'package:fpdart/fpdart.dart';
 import '../../../../core/error/exceptions.dart';
 
 class RemoteDataSource {
-  final String baseUrl;
-
-  RemoteDataSource(this.baseUrl);
+  RemoteDataSource();
 
   // Future<Either<Failure, dynamic>> fetchDataByRole(
   //     String role, String uId, String date) async {
@@ -29,7 +28,7 @@ class RemoteDataSource {
       String doctorId, String date) async {
     try {
       final response = await http.get(Uri.parse(
-          '$baseUrl/Doctor/GetDoctorDashbord?DoctorUId=$doctorId&Date=$date'));
+          '${ApiConfig.doctorDashboard}?DoctorUId=$doctorId&Date=$date'));
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
@@ -48,8 +47,8 @@ class RemoteDataSource {
   Future<Either<Failure, PatientModel>> fetchPatientDetails(
       String patientId) async {
     try {
-      final response = await http.get(
-          Uri.parse('$baseUrl/Patient/GetPatientByUId?PatientUId=$patientId'));
+      final response = await http.get(Uri.parse(
+          '${ApiConfig.baseUrl}/Patient/GetPatientByUId?PatientUId=$patientId'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -70,7 +69,8 @@ class RemoteDataSource {
 
   Future<DoctorModel> getDoctorByUid(String doctorId) async {
     final response = await http.get(
-      Uri.parse('$baseUrl/Doctor/GetDoctorByUId?DoctorUId=$doctorId'),
+      Uri.parse(
+          '${ApiConfig.baseUrl}/Doctor/GetDoctorByUId?DoctorUId=$doctorId'),
     );
 
     if (response.statusCode == 200) {
@@ -91,8 +91,8 @@ class RemoteDataSource {
   }
 
   Future<List<dynamic>> fetchAllPatients() async {
-    final response =
-        await http.get(Uri.parse('$baseUrl/Patient/GetAllUser?Role=patient'));
+    final response = await http
+        .get(Uri.parse('${ApiConfig.baseUrl}/Patient/GetAllUser?Role=patient'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
@@ -108,8 +108,8 @@ class RemoteDataSource {
   }
 
   Future<Map<String, dynamic>> getPatientByUid(String uId) async {
-    final response = await http
-        .get(Uri.parse('$baseUrl/Patient/GetPatientByUId?PatientUId=$uId'));
+    final response = await http.get(Uri.parse(
+        '${ApiConfig.baseUrl}/Patient/GetPatientByUId?PatientUId=$uId'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);

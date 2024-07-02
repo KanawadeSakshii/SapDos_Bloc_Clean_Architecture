@@ -2,7 +2,7 @@ enum UserRole { doctor, patient }
 
 extension UserRoleExtension on UserRole {
   String toShortString() {
-    return this.toString().split('.').last;
+    return toString().split('.').last;
   }
 }
 
@@ -50,7 +50,7 @@ class UserModel {
       'mobileNumber': mobileNumber,
       'password': password,
       'confirmpassword': confirmpassword,
-      'role': role == UserRole.patient ? 'patient' : 'doctor',
+      'role': role == UserRole.doctor ? 'doctor' : 'patient',
       'description': description,
       'specialization': specialization,
       'address': address,
@@ -72,7 +72,7 @@ class UserModel {
       mobileNumber: map['mobileNumber'],
       password: map['password'],
       confirmpassword: map['confirmpassword'],
-      role: map['role'] == 'patient' ? UserRole.patient : UserRole.doctor,
+      role: map['role'] == 'doctor' ? UserRole.doctor : UserRole.patient,
       experience: map['role'] == 'doctor' ? map['experience'] : null,
       description: map['description'],
       specialization: map['specialization'],

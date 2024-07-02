@@ -7,9 +7,8 @@ void navigateTo(String routeName) {
 
 void setupAuthLocator() {
   serviceLocator.registerLazySingleton<Logger>(() => logger);
-  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(() =>
-      AuthRemoteDataSource(
-          baseUrl: 'https://sapdos-api-v2.azurewebsites.net/api'));
+  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
+      () => AuthRemoteDataSource());
 
   // User Repository
   serviceLocator.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -31,8 +30,8 @@ void setupAuthLocator() {
 // doctor
 void setupDoctorDashBoardLocator() {
   // Register RemoteDataSource
-  serviceLocator.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSource('https://sapdos-api-v2.azurewebsites.net/api'));
+  serviceLocator
+      .registerLazySingleton<RemoteDataSource>(() => RemoteDataSource());
 
   // Register Repository
   serviceLocator.registerLazySingleton<DoctorDashboardRepositoryimpl>(
@@ -61,8 +60,7 @@ void setupDoctorDashBoardLocator() {
 
 void setUpPatientLocator() {
   serviceLocator.registerLazySingleton<RemoteDataSourcePatient>(
-    () =>
-        RemoteDataSourcePatient("https://sapdos-api-v2.azurewebsites.net/api"),
+    () => RemoteDataSourcePatient(),
   );
 
   serviceLocator.registerFactory<PatientBloc>(

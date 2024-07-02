@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bloc_project/core/constants/constants.dart';
 import 'package:bloc_project/core/error/failure.dart';
 import 'package:bloc_project/features/doctor/data/models/doctor_model.dart';
 import 'package:bloc_project/features/patient/data/model/appointment_book_response.dart';
@@ -9,17 +10,15 @@ import 'package:http/http.dart' as http;
 import 'package:fpdart/fpdart.dart';
 
 class RemoteDataSourcePatient {
-  final String baseUrl;
-
-  RemoteDataSourcePatient(this.baseUrl);
+  RemoteDataSourcePatient();
 
   Future<Either<Failure, List<DoctorModel>>> getAllDoctors() async {
     try {
-      final response =
-          await http.get(Uri.parse('$baseUrl/Patient/GetAllUser?Role=doctor'));
+      final response = await http.get(
+          Uri.parse('${ApiConfig.baseUrl}/Patient/GetAllUser?Role=doctor'));
 
-      logger
-          .info('HTTP GET request to: $baseUrl/Patient/GetAllUser?Role=doctor');
+      logger.info(
+          'HTTP GET request to: ${ApiConfig.baseUrl}/Patient/GetAllUser?Role=doctor');
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
@@ -44,11 +43,11 @@ class RemoteDataSourcePatient {
     try {
       final response = await http.get(
         Uri.parse(
-            '$baseUrl/Patient/GetAvailbleSlot?DoctorUId=$doctorUId&Date=$date'),
+            '${ApiConfig.availableSlots}?DoctorUId=$doctorUId&Date=$date'),
       );
 
       logger.info(
-          'API request URL: $baseUrl/Patient/GetAvailbleSlot?DoctorUId=$doctorUId&Date=$date');
+          'API request URL:${ApiConfig.baseUrl}/Patient/GetAvailbleSlot?DoctorUId=$doctorUId&Date=$date');
 
       if (response.statusCode == 200) {
         final List<dynamic> slotsJson = jsonDecode(response.body);
@@ -74,7 +73,7 @@ class RemoteDataSourcePatient {
   Future<AppointmentBookingResponse> bookAppointment(
       AppointmentBookingRequest request) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/Patient/BookAppointment'),
+      Uri.parse(ApiConfig.bookAppointment),
       headers: {'Content-Type': 'application/json'},
       body: json.encode(request.toJson()),
     );
